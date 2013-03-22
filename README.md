@@ -1,4 +1,4 @@
 RandomPossessions
 =================
 
-BNR Project
+BNR Chapter 2 Project

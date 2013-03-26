@@ -9,15 +9,19 @@
 #import "BNRContainer.h"
 
 @implementation BNRContainer
-
--(id)initWithItemName:(NSString *)name valueInDollars:(int)dollars serialNumber:(NSString *)sNumber
++(id)randomItem
 {
-    self = [super init];
+    BNRContainer *newItem = (BNRContainer *)[super randomItem];
+    newItem.subItems= @[[BNRItem randomItem]];
+    return newItem;
+    
+    
+}
+-(id)initWithItemName:(NSString *)name valueInDollars:(int)dollars serialNumber:(NSString *)sNumber andSubItems:(NSArray *)subItems
+{
+    self = [super initWithItemName:name valueInDollars:dollars serialNumber:sNumber];
     if(self){
-        [self setItemName:name];
-        [self setValueInDollars:dollars];
-        [self setSerialNumber:sNumber];
-        subItems = [[NSMutableArray alloc] initWithObjects:[BNRContainer randomItem],[BNRContainer randomItem],[BNRContainer randomItem], nil];
+        self.subItems = subItems;
 
     }
     return self;
@@ -26,8 +30,8 @@
 -(NSString *)description
 {
     NSString *descriptionString = [[NSString alloc] initWithFormat:@"%@ (%@) is worth %d. It contains : %@",
-                                                                    itemName,
-                                                                    serialNumber,
+                                                                    self.itemName,
+                                                                    self.serialNumber,
                                                                     [self containerValue],
                                                                     [self listedItems]];
     
@@ -39,9 +43,12 @@
 {
     int totalValue = [self valueInDollars];
     
-    for(BNRContainer *item in subItems)
+    for(id item in self.subItems)
     {
-        totalValue = totalValue + [item valueInDollars];
+        if([item isKindOfClass:[BNRContainer class]])
+            totalValue += [item containerValue];
+        else
+            totalValue += [item valueInDollars];
     }
     
     return totalValue;
@@ -50,17 +57,13 @@
 //List of items in container
 -(NSString *)listedItems
 {
-    NSString *itemsList = [[NSString alloc] init];
-    for(BNRContainer *item in subItems)
-        [itemsList stringByAppendingString:[item itemName]];
+    NSString *itemsList = @"";
+    for(BNRContainer *item in self.subItems)
+        itemsList = [NSString stringWithFormat:@"%@;%@", itemsList, item.description];
     
     return itemsList;
 }
 
--(NSMutableArray *)subItems
-{
-    return subItems;
-}
 
 
 

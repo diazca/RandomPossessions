@@ -10,10 +10,13 @@
 
 @interface BNRContainer : BNRItem
 {
-    NSMutableArray *subItems;
+   
 }
--(NSMutableArray *)subItems;
--(int)containerValue;
+
+-(id)initWithItemName:(NSString *)name valueInDollars:(int)dollars serialNumber:(NSString *)sNumber andSubItems:(NSArray *)subItems;
+
+@property (nonatomic,retain) NSArray *subItems;
+
 -(NSString *)listedItems;
 
 @end

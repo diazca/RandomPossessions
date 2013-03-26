@@ -72,17 +72,8 @@
 }
 -(NSString *)description
 {
-    NSString *descriptionString = [[NSString alloc] initWithFormat:@"%@ (%@): Worth $%d, recorded on  %@", itemName,serialNumber,valueInDollars,dateCreated];
+    NSString *descriptionString = [[NSString alloc] initWithFormat:@"%@ (%@): Worth $%d, recorded on  %@", self.itemName,serialNumber,valueInDollars,dateCreated];
     return descriptionString;
-}
--(void)setItemName:(NSString *)str
-{
-    itemName = str;
-}
-
--(NSString *)itemName
-{
-    return itemName;
 }
 
 -(void)setSerialNumber:(NSString *)str

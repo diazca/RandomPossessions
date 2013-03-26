@@ -20,10 +20,8 @@ int main(int argc, const char * argv[])
         
         for(int i=0;i<5;i++)
         {
-            BNRContainer *item = [[BNRContainer alloc]initWithItemName:[[BNRItem randomItem] itemName]
-                                                        valueInDollars:[[BNRItem randomItem] valueInDollars]
-                                                          serialNumber:[[BNRItem randomItem] serialNumber]];
-            [array addObject:item];
+
+            [array addObject:[BNRContainer randomItem]];
         }
         
         for(BNRContainer *item in array)

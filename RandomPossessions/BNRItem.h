@@ -10,11 +10,13 @@
 
 @interface BNRItem : NSObject
 {
-    NSString *itemName;
     NSString *serialNumber;
     int valueInDollars;
     NSDate *dateCreated;
 }
+
+@property (nonatomic,retain)NSString *itemName;
+@property (nonatomic, readonly)NSString *description;
 
 +(id)randomItem;
 
@@ -25,9 +27,6 @@
 //Chapter 2: Silver Solution
 -(id)initWithItemName:(NSString *)name
          serialNumber:(NSString *)sNumber;
-
--(void)setItemName:(NSString *)str;
--(NSString *)itemName;
 
 -(void)setSerialNumber:(NSString *)str;
 -(NSString *)serialNumber;
